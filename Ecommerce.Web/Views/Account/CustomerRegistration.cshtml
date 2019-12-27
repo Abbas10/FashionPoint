@@ -1,0 +1,107 @@
+﻿@model Ecommerce.Model.CustomerRegister
+@{
+    ViewData["Title"] = "Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-md-center">
+    <div class="col-6">
+        <!-- Material form register -->
+        <div class="card">
+            <h5 class="card-header info-color white-text text-center py-4">
+                <strong><i class="fas fa-user-plus"></i> Sign up</strong>
+            </h5>
+
+            <!--Card content-->
+            <div class="card-body px-lg-5 pt-0">
+                <!-- Form -->
+                <form asp-controller="Account" asp-action="CustomerRegistration" method="post" class="text-center" style="color: #757575;"
+                      asp-route-returnUrl="@ViewBag.ReturnUrl">
+                    @if (!string.IsNullOrEmpty(ViewBag.Message))
+                    {
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-danger" role="alert">
+                                    @ViewBag.Message
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <!-- Name -->
+                    <div class="md-form">
+                        <input asp-for="Name" class="form-control">
+                        <label for="Name">Name</label>
+                    </div>
+
+                    <!-- E-mail -->
+                    <div class="md-form mt-0">
+                        <input asp-for="Email" class="form-control">
+                        <label for="Email">E-mail</label>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="md-form">
+                        <input asp-for="Password" type="password" class="form-control" aria-describedby="PasswordHelpBlock">
+                        <label for="Password">Password</label>
+                        @*<small id="PasswordHelpBlock" class="form-text text-muted mb-4">
+                            At least 8 characters and 1 digit
+                        </small>*@
+                    </div>
+
+                    <!-- Phone number -->
+                    <div class="md-form">
+                        <input asp-for="ContactNo" class="form-control">
+                        <label for="ContactNo">Contact No.</label>
+                    </div>
+
+
+                    <!-- Address Line 1 -->
+                    <div class="md-form">
+                        <input asp-for="AddressLine1" class="form-control">
+                        <label for="AddressLine1">Address Line 1</label>
+                    </div>
+
+                    <!-- Address Line 2 -->
+                    <div class="md-form">
+                        <input asp-for="AddressLine2" class="form-control">
+                        <label for="AddressLine2">Address Line 2</label>
+                    </div>
+
+                    <!-- City -->
+                    <div class="md-form">
+                        <input asp-for="City" class="form-control">
+                        <label for="City">City</label>
+                    </div>
+
+                    <!-- State -->
+                    <div class="md-form">
+                        <input asp-for="State" class="form-control">
+                        <label for="State">State</label>
+                    </div>
+                    <!-- Zipcode -->
+                    <div class="md-form">
+                        <input asp-for="Zipcode" class="form-control">
+                        <label for="Zipcode">Zip Code</label>
+                    </div>
+
+                    <!-- Sign up button -->
+                    <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
+
+                </form>
+                <!-- Form -->
+
+            </div>
+
+        </div>
+        <!-- Material form register -->
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".navbar-nav").find(".active").removeClass("active");
+            $(".navbar-nav").find(".nav-register").addClass("active");
+        });
+    </script>
+}

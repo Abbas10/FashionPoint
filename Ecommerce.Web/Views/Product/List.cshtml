@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles
+{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.4.2/b-html5-1.4.2/b-print-1.4.2/sl-1.2.3/datatables.min.css" />
+}
+
+@(Html.Ext().Grid<ProductRequest>().Name("product").RowId("Id")
+               .Columns(cols =>
+               {
+                   cols.Add(c => c.ProductName).Title("Product Name").Render(() => "productColumnFormatter").Width("15%");
+                   cols.Add(c => c.CategoryName).Title("Category Name").Render(() => "categoryColumnFormatter").Width("15%");
+                   cols.Add(c => c.UnitName).Title("Unit").Render(() => "unitColumnFormatter").Width("15%");
+                   cols.Add(c => c.AvailableDiscount).Title("Discount").Render(() => "discountColumnFormatter").Width("15%");
+                   cols.Add(c => c.UnitPrice).Title("Unit Price").Render(() => "unitPriceColumnFormatter").Width("10%");
+                   cols.Add(c => c.Status).Title("Status").Render(() => "statusColumnFormatter").Width("10%");
+                   cols.Add(c => c.Id).Data("Id").Title("Action").Render(() => "actionFormatter").Width("20%");
+               })
+               .ServerSide(true)
+               .DataSource(c =>
+                   c.Ajax().Url("/product/GetProductList").Method("GET")
+               )
+)
+
+
+@section Scripts{
+    <script src="~/js/addons/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".navbar-nav").find(".active").removeClass("active");
+            $(".navbar-nav").find(".nav-product").addClass("active");
+        });
+        function productColumnFormatter(data, type, row, meta) {
+            return "<span>" + row.productName + " </span>";
+        }
+        function categoryColumnFormatter(data, type, row, meta) {
+            return "<span>" + row.categoryName + " </span>";
+        }
+        function unitColumnFormatter(data, type, row, meta) {
+            return "<span>" + row.unitName + " </span>";
+        }
+        function discountColumnFormatter(data, type, row, meta) {
+            return "<span>" + row.availableDiscount + "</span>";
+        }
+        function statusColumnFormatter(data, type, row, meta) {
+            return "<span>" + row.status + "</span>";
+        }
+        function unitPriceColumnFormatter(data, type, row, meta) {
+            return "<span>" + row.unitPrice + "</span>";
+        }
+        function actionFormatter(data, type, row, meta) {
+            return '<a href="/product/createupdate/' + row.id + '" type="button" data-type="view" class="btn btn-sm btn-info"><i class="fa fa-lg fa-fw fa-edit"></i></a>' +
+                '<a href="/product/Delete/' + row.id + '" type="button" data-type="remove" class="btn btn-sm btn-danger"><i class="fa fa-lg fa-fw fa-trash"></i></a>';
+        }
+    </script>
+}

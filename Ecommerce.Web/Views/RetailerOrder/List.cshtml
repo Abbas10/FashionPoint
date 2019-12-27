@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.4.2/b-html5-1.4.2/b-print-1.4.2/sl-1.2.3/datatables.min.css" />
+}
+
+@(Html.Ext().Grid<OrderRequest>().Name("product").RowId("Id")
+               .Columns(cols =>
+               {
+                   cols.Add(c => c.OrderNo).Title("Order No").Render(() => "orderNoColumnFormatter").Width("15%");
+                   cols.Add(c => c.OrderDate).Title("Order Date").Render(() => "orderDateColumnFormatter").Width("15%");
+                   cols.Add(c => c.Status).Title("Status").Render(() => "statusColumnFormatter").Width("15%");
+                   cols.Add(c => c.TotalDiscount).Title("Discount").Render(() => "discountColumnFormatter").Width("15%");
+                   cols.Add(c => c.TotalAmount).Title("Total").Render(() => "totalPriceColumnFormatter").Width("10%");
+                   cols.Add(c => c.Id).Data("Id").Title("Action").Render(() => "actionFormatter").Width("20%");
+               })
+               .ServerSide(true)
+               .DataSource(c =>
+                   c.Ajax().Url("/RetailerOrder/GetOrderList").Method("GET")
+               )
+)
+
+
+@section Scripts{
+    <script src="~/js/addons/datatables.min.js"></script>
+    <script src="~/js/addons/moment.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".navbar-nav").find(".active").removeClass("active");
+            $(".navbar-nav").find(".nav-order").addClass("active");
+        });
+        function orderNoColumnFormatter(data, type, row, meta) {
+            return "<span>" + row.orderNo + " </span>";
+        }
+        function orderDateColumnFormatter(data, type, row, meta) {
+            debugger
+            return "<span>" + moment(row.orderDate).format("DD-MM-YYYY") + " </span>";
+        }
+        function statusColumnFormatter(data, type, row, meta) {
+            return "<span>" + row.status + " </span>";
+        }
+        function discountColumnFormatter(data, type, row, meta) {
+            return "<span>" + row.totalDiscount + "</span>";
+        }
+        function totalPriceColumnFormatter(data, type, row, meta) {
+            return "<span>" + row.totalAmount + "</span>";
+        }
+        function actionFormatter(data, type, row, meta) {
+            return '<a href="/order/update/' + row.id + '" type="button" data-type="view" class="btn btn-sm btn-info"><i class="fa fa-lg fa-fw fa-edit"></i></a>';
+                
+        }
+    </script>
+}
+
+

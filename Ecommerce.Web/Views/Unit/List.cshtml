@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles
+{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.4.2/b-html5-1.4.2/b-print-1.4.2/sl-1.2.3/datatables.min.css" />
+}
+
+@(Html.Ext().Grid<CategoryRequest>().Name("unit").RowId("Id")
+               .Columns(cols =>
+               {
+                   cols.Add(c => c.CategoryName).Title("Unit Name").Render(() => "unitFormatter").Width("80%");
+                   cols.Add(c => c.Id).Data("Id").Title("").Render(() => "actionFormatter");
+               })
+               .ServerSide(true)
+               .DataSource(c =>
+                   c.Ajax().Url("/unit/GetUnitList").Method("GET")
+               )
+)
+
+
+@section Scripts{
+    <script src="~/js/addons/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".navbar-nav").find(".active").removeClass("active");
+            $(".navbar-nav").find(".nav-unit").addClass("active");
+        });
+        function unitFormatter(data, type, row, meta) {
+            return "<span>" + row.unitName + "</span>"
+        }
+        function actionFormatter(data, type, row, meta) {
+            debugger
+            return '<a href="/unit/createupdate/' + row.id + '" type="button" data-type="view" class="btn btn-sm btn-info"><i class="fa fa-lg fa-fw fa-edit"></i></a>' +
+                    '<a href="/unit/Delete/' + row.id + '" type="button" data-type="remove" class="btn btn-sm btn-danger"><i class="fa fa-lg fa-fw fa-trash"></i></a>';
+        }
+        function onClick(e) {
+            if (e.data.type == 'remove') {
+                console.log('remove clicked');
+            } else if (e.data.type == 'view') {
+                console.log('view clicked');
+            }
+        }
+    </script>
+}
+
+

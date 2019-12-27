@@ -1,0 +1,62 @@
+﻿@model UnitRequest
+@{
+    ViewData["Title"] = "CreateUpdate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-md-center">
+    <div class="col-10">
+        <!-- Material form contact -->
+        <div class="card">
+            <div class="card-header info-color white-text text-center ">
+                <div class="row">
+                    <div class="col-md-2">&nbsp;</div>
+                    <div class="col-md-8">
+                        <h5 class="py-4">
+                            <strong>Unit</strong>
+                        </h5>
+                    </div>
+                    <div class="col-md-2">
+                        <a asp-controller="unit" asp-action="list" class="btn btn-outline-white btn-rounded btn-block waves-effect">Back</a>
+                    </div>
+                </div>
+
+            </div>
+            <!--Card content-->
+            <div class="card-body px-lg-5 pt-0">
+                <!-- Form -->
+                <form asp-controller="Unit" asp-action="CreateUpdate" method="post" class="text-center" style="color: #757575;">
+                    @if (!string.IsNullOrEmpty(ViewBag.Message))
+                    {
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-danger" role="alert">
+                                    @ViewBag.Message
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    @Html.HiddenFor(x => x.Id)
+                    <!-- Name -->
+                    <div class="md-form mt-3">
+                        <input type="text" asp-for="UnitName" class="form-control">
+                        <label for="UnitName">Unit Name</label>
+                        <span asp-validation-for="UnitName" class="text-danger"></span>
+                    </div>
+                    <!-- Send button -->
+                    <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Save</button>
+                </form>
+                <!-- Form -->
+            </div>
+        </div>
+        <!-- Material form contact -->
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".navbar-nav").find(".active").removeClass("active");
+            $(".navbar-nav").find(".nav-unit").addClass("active");
+        });
+    </script>
+}

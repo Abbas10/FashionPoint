@@ -1,0 +1,167 @@
+﻿@model ProductRequest
+@{
+    ViewData["Title"] = "CreateUpdate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles{
+    <style>
+        .popover {
+            max-width: 500px
+        }
+    </style>
+}
+<div class="row justify-content-md-center">
+    <div class="col-12">
+        <!-- Material form contact -->
+        <div class="card">
+            <div class="card-header info-color white-text text-center ">
+                <div class="row">
+                    <div class="col-md-2">&nbsp;</div>
+                    <div class="col-md-8">
+                        <h5 class="py-4">
+                            <strong>Product</strong>
+                        </h5>
+                    </div>
+                    <div class="col-md-2">
+                        <a asp-controller="product" asp-action="list" class="btn btn-outline-white btn-rounded btn-block waves-effect">Back</a>
+                    </div>
+                </div>
+
+            </div>
+            <!--Card content-->
+            <div class="card-body px-lg-5 pt-0">
+                <!-- Form -->
+                <form class="md-form" enctype="multipart/form-data" asp-controller="Product" asp-route-id="Model.Id" asp-action="CreateUpdate" method="post" style="color: #757575;">
+                    @if (!string.IsNullOrEmpty(ViewBag.Message))
+                    {
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-danger" role="alert">
+                                    @ViewBag.Message
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    @Html.HiddenFor(x => x.Id)
+                    <!-- Name -->
+                    <div class="md-form mt-3">
+                        <input type="text" asp-for="ProductName" class="form-control">
+                        <label for="ProductName">Product Name</label>
+                        <span asp-validation-for="ProductName" class="text-danger"></span>
+                    </div>
+                    <div class="mt-3">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <span for="Category">Category</span>
+                            </div>
+                            <div class="col-md-10 mb-4">
+                                <select class="custom-select d-block w-100"
+                                        asp-for="CategoryId"
+                                        asp-items="@(new SelectList(ViewBag.Categories,"Id","CategoryName"))" required>
+                                    <option value="">Select Category</option>
+                                </select>
+                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <span for="Unit">Unit</span>
+                            </div>
+                            <div class="col-md-10 mb-4">
+                                <select class="custom-select d-block w-100"
+                                        asp-for="UnitId"
+                                        asp-items="@(new SelectList(ViewBag.Units,"Id","UnitName"))" required>
+                                    <option value="">Select Unit</option>
+                                </select>
+                                <span asp-validation-for="UnitId" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md-form mt-3">
+                        <input type="text" asp-for="UnitPrice" class="form-control">
+                        <label for="UnitPrice">Unit Price</label>
+                        <span asp-validation-for="UnitPrice" class="text-danger"></span>
+                    </div>
+                    <div class="md-form mt-3">
+                        <input type="text" asp-for="AvailableDiscount" class="form-control">
+                        <label for="AvailableDiscount">Available Discount</label>
+                        <span asp-validation-for="AvailableDiscount" class="text-danger"></span>
+                    </div>
+                    <div class="md-form">
+                        <div class="col-md-12">
+                            <!-- Default inline 1-->
+                            <div class="col-md-2 custom-control custom-radio custom-control-inline">
+                                <input type="radio" value="@ProductStatus.InStock"
+                                       class="custom-control-input" asp-for="Status"
+                                       id="@ProductStatus.InStock">
+                                <label class="custom-control-label" for="@ProductStatus.InStock">@ProductStatus.InStock.ToString()</label>
+                            </div>
+
+                            <!-- Default inline 2-->
+                            <div class="col-md-2 custom-control custom-radio custom-control-inline">
+                                <input type="radio" value="@ProductStatus.OutOfStock"
+                                       class="custom-control-input" asp-for="Status"
+                                       id="@ProductStatus.OutOfStock" name="Status">
+                                <label class="custom-control-label" for="@ProductStatus.OutOfStock">@ProductStatus.OutOfStock.ToString()</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md-form mt-3">
+                        <div class="row">
+                            <div class="col-md-12 file-field">
+                                <div class="btn btn-primary btn-sm float-left" id="fileSelector">
+                                    <span>Choose file</span>
+                                </div>
+                                <input id="file" name="file" type="file" style="display:none">
+                                <div class="file-path-wrapper">
+                                    <input id="productFileName" class="file-path validate" type="text" placeholder="Upload your file">
+                                    @if (!string.IsNullOrEmpty(Model?.Photo))
+                                    {
+                                        <a class="btn btn-primary" data-toggle="popover-hover" data-img="/images/@Model.Photo">
+                                            Product Image
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+
+                            <input type="hidden" asp-for="Photo" />
+                        </div>
+                    </div>
+
+                    <!-- Send button -->
+                    <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Save</button>
+                </form>
+                <!-- Form -->
+            </div>
+        </div>
+        <!-- Material form contact -->
+    </div>
+</div>
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $(".navbar-nav").find(".active").removeClass("active");
+            $(".navbar-nav").find(".nav-product").addClass("active");
+
+            $("#fileSelector").click(function () {
+                $("#file").click();
+            });
+            $("#file").on("change", function (e) {
+                $("#productFileName").attr("placeholder", this.files[0].name)
+            });
+
+            // popovers initialization - on hover
+            $('[data-toggle="popover-hover"]').popover({
+                html: true,
+                trigger: 'hover',
+                placement: 'right',
+                content: function () {
+                    return '<div style="width:250px" ><img class="img-fluid z-depth-1"  src="' + $(this).data('img') + '" /><div>';
+                }
+            });
+        });
+    </script>
+}
