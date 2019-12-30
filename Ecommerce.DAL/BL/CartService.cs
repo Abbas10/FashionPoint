@@ -35,6 +35,7 @@ namespace Ecommerce.DAL.BL
             var items = await _repository.GetCartItemsAsyc(id);
             return items.Select(x => new ShoppingCartItem
                     {
+                        Id = x.Id,
                         ProductId = x.ProductId,
                         ProductName = x.Product.ProductName,
                         Photo = x.Product.Photo,

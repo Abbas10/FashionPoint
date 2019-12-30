@@ -61,10 +61,10 @@
                                             <strong>@((ViewHelper.GetProductPrice(item.value.UnitPrice, item.value.Discount) * item.value.Quantity).ToString("#.##"))</strong>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top"
+                                            <a asp-controller="cart" asp-action="RemoveItem" asp-route-id="@item.value.Id" type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top"
                                                     title="Remove item">
                                                 X
-                                            </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 }
