@@ -14,7 +14,7 @@ namespace Ecommerce.DAL.Repositories
     {
         /// <summary>
         /// Get Category list
-        /// </summary>
+        /// </summary> 
         /// <returns></returns>
         Task<List<Category>> GetCategoriesAsync(PaginationFilter paginationFilter);
 

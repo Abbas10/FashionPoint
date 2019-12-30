@@ -11,3 +11,4 @@ namespace Ecommerce.DAL.DataModels
         public virtual ApplicationRole Role { get; set; }
     }
 }
+ 

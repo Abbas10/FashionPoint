@@ -1,4 +1,6 @@
-﻿using Ecommerce.Model;
+﻿using Ecommerce.API.Extensions;
+using Ecommerce.DAL.BL;
+using Ecommerce.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
@@ -6,8 +8,19 @@ using System;
 
 namespace Ecommerce.WebService.Options
 {
-    public class EcommerceApiExceptionFilter : IActionFilter, IOrderedFilter
+    public class EcommerceApiFilter : IActionFilter, IOrderedFilter
     {
+        #region Declaration
+        public readonly IIdentityService _service;
+        #endregion
+
+        #region Constructor
+        public EcommerceApiFilter(IIdentityService service)
+        {
+            _service = service;
+        }
+        #endregion
+
         public int Order { get; set; } = int.MaxValue - 10;
 
         public void OnActionExecuted(ActionExecutedContext context)
@@ -37,7 +50,24 @@ namespace Ecommerce.WebService.Options
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            
+            var userId = context.HttpContext.GetUserId();
+            if(userId != null)
+            {
+                if (_service.IsUserLockedByAdmin(userId).Result)
+                {
+                    string stringData = JsonConvert.SerializeObject(new ServiceDataWrapper<string>
+                    {
+                        Error = new string[] { "User Locked" },
+                        value = null,
+                        ErrorCode = (short) System.Net.HttpStatusCode.Locked
+                    });
+
+                    context.Result = new ObjectResult(System.Net.HttpStatusCode.Locked)
+                    {
+                        Value = stringData
+                    };
+                }
+            }
         }
     }
 }

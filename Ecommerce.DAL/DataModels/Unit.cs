@@ -23,7 +23,7 @@ namespace Ecommerce.DAL.DataModels
 
         /// <summary>
         /// 
-        /// </summary>
+        /// </summary> 
         public bool IsActive { get; set; } = true;
 
         /// <summary>

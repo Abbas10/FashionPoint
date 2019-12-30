@@ -17,7 +17,7 @@ namespace Ecommerce.WebService.Controllers
         [HttpGet]
         public ServiceDataWrapper<Register> Get()
         {
-            //var s = 0;
+            //var s = 0; 
             //var a = 1 / s;
             return new ServiceDataWrapper<Register>
             {

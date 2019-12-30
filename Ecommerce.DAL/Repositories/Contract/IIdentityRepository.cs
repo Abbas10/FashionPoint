@@ -51,5 +51,19 @@ namespace Ecommerce.DAL.Repositories
         /// <param name="ApplicationUserId">Customer Id / Retailer Id</param>
         /// <returns></returns>
         Task<bool> LockUnLockApplicationUser(string ApplicationUserId);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        Task<bool> ConfirmEmail(string id, string token);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> IsUserLockedByAdmin(string id);
     }
 }

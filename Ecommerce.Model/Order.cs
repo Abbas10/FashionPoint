@@ -4,12 +4,6 @@ using System.Text;
 
 namespace Ecommerce.Model
 {
-    public class CustomerOrderedProductRequest
-    {
-        public int ProductId { get; set; }
-        public short Quantity { get; set; }
-
-    }
     public class OrderRequest : BaseModel
     {
         /// <summary>
@@ -21,17 +15,17 @@ namespace Ecommerce.Model
         /// Order No (for customer perspective)
         /// </summary>
         public string OrderNo { get; set; } = Guid.NewGuid().ToString();
-        
+
         /// <summary>
         /// Order Date (default: Today's Date)
         /// </summary>
         public DateTime OrderDate { get; set; } = DateTime.Now;
-        
+
         /// <summary>
         /// Total discount of the order
         /// </summary>
         public decimal TotalDiscount { get; set; }
-        
+
         /// <summary>
         /// Total Amount after Discount
         /// </summary>
@@ -41,7 +35,10 @@ namespace Ecommerce.Model
         /// Order Status
         /// </summary>
         public OrderStatus Status { get; set; } = OrderStatus.Received;
-        
+        /// <summary>
+        /// Customer Detail
+        /// </summary>
+        public ApplicationUserRequest CustomerDetail{get;set;}
         /// <summary>
         /// Order Details
         /// </summary>
@@ -110,7 +107,7 @@ namespace Ecommerce.Model
     }
     public class UpdateOrderRequest 
     { 
-        public OrderStatus OrderStatus { get; set; }
+        public OrderStatus Status { get; set; }
     }
     public enum OrderStatus
     {

@@ -21,7 +21,7 @@ namespace Ecommerce.DAL.DataModels
 
         /// <summary>
         /// 
-        /// </summary>
+        /// </summary> 
         [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; }
 

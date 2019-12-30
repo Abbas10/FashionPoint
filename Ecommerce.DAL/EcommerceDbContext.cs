@@ -43,6 +43,11 @@ namespace Ecommerce.DAL
         /// </summary>
         public DbSet<Product> Products { get; set; }
 
+        /// <summary>
+        /// Shopping cart
+        /// </summary>
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

@@ -20,7 +20,7 @@ namespace Ecommerce.DAL.BL
         private readonly IMapper _mapper;
         #endregion
 
-        #region Constructor
+        #region Constructor 
         public ProductService(IProductRepository repository, IMapper mapper)
         {
             _repository = repository;
@@ -93,7 +93,7 @@ namespace Ecommerce.DAL.BL
                 ProductName = product.ProductName,
                 Photo = product.Photo,
                 UnitPrice = product.UnitPrice,
-                AvailableDiscount = product.AvailableDiscount.Value,
+                AvailableDiscount = product.AvailableDiscount ?? 0,
                 Status = (short)product.Status,
                 CategoryId = product.CategoryId,
                 UnitId = product.UnitId,

@@ -19,7 +19,7 @@ namespace Ecommerce.DAL.DataModels
 
         /// <summary>
         /// 
-        /// </summary>
+        /// </summary> 
         public string City { get; set; }
         
         /// <summary>

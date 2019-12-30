@@ -86,7 +86,10 @@ namespace Ecommerce.DAL.Repositories
                     };
                 }
             }
-            return await GenerateAuthenticationResultForUserAsync(newUser);
+            var authResult = await GenerateAuthenticationResultForUserAsync(newUser);
+            authResult.Id = newUser.Id;
+            authResult.EmailConfirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
+            return authResult;
         }
 
 
@@ -99,40 +102,28 @@ namespace Ecommerce.DAL.Repositories
         public async Task<AuthenticationResult> LoginAsync(string email, string password)
         {
             var user = await _userManager.FindByEmailAsync(email);
-            
-            if (user == null)
-            {
-                return new AuthenticationResult
-                {
-                    Errors = new[] { "User does not exist" }
-                };
-            }
-            else if (!user.EmailConfirmed)
-            {
-                return new AuthenticationResult
-                {
-                    Errors = new[] { "Email Address is not verified." }
-                };
-            }
-            else if (await _userManager.IsLockedOutAsync(user))
-            {
-                return new AuthenticationResult
-                {
-                    Errors = new[] { "User is Locked." }
-                };
-            }
-
             var userHasValidPassword = await _userManager.CheckPasswordAsync(user, password);
+            string error = string.Empty;
+            if (user == null)
+                error = "User does not exist";
+            else if (!user.EmailConfirmed &&  !await _userManager.IsInRoleAsync(user, ApplicationConstant.ApplicationRoles.Administrator) && userHasValidPassword)
+                error = "Email Address is not verified.";
+            else if (!userHasValidPassword)
+                error = "User/password combination is wrong";
+            else if (await _userManager.IsLockedOutAsync(user))
+                error = "User is Locked.";
 
-            if (!userHasValidPassword)
-            {
+            if (!string.IsNullOrEmpty(error)) 
+            { 
                 return new AuthenticationResult
                 {
-                    Errors = new[] { "User/password combination is wrong" }
+                    Errors = new[] {  error }
                 };
             }
-
-            return await GenerateAuthenticationResultForUserAsync(user);
+            else
+            { 
+                return await GenerateAuthenticationResultForUserAsync(user);
+            }
         }
 
 
@@ -238,6 +229,29 @@ namespace Ecommerce.DAL.Repositories
 
             var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
             return await query.Skip(skip).Take(paginationFilter.PageSize).ToListAsync();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public async Task<bool> ConfirmEmail(string id, string token)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            var response = await _userManager.ConfirmEmailAsync(user, token);
+            return response.Succeeded;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<bool> IsUserLockedByAdmin(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            return await _userManager.IsLockedOutAsync(user);
         }
         #endregion
 
@@ -363,8 +377,14 @@ namespace Ecommerce.DAL.Repositories
              * this filter is used to filter application user
              */
             query = (!string.IsNullOrEmpty(filter?.UserName)) ? query.Where(x => x.UserName.Contains(filter.UserName)) : query;
+
+            /*
+             * 
+             */
+            query = (filter?.ExcludeAdmin == true) ? query.Where(x => x.UserRoles.Any(x => x.Role.Name != ApplicationConstant.ApplicationRoles.Administrator)): query;
             return query;
         }
+        
         #endregion
 
     }

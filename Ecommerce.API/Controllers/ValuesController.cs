@@ -23,7 +23,7 @@ namespace Ecommerce.WebService.Controllers
         {
             return new ServiceDataWrapper<string>
             {
-                value = "dfsadfsadfsa"
+                value = "dfsadfsadfsa" 
             };
         }
     }

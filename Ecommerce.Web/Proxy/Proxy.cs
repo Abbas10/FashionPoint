@@ -118,7 +118,7 @@ namespace Ecommerce.Web.Proxy
                     var output = JsonConvert.DeserializeObject<ServiceDataWrapper<T>>(stream);
                     if (output.Error != null)
                     {
-                        throw new EcommerceWebException(output.Error.Count() > 0? string.Join('|', output.Error): null, output.ErrorCode)
+                        throw new EcommerceWebException(output.Error.Count() > 0 ? string.Join('|', output.Error): null, output.ErrorCode)
                         {
                             Source = httpResponse.RequestMessage.RequestUri.AbsoluteUri
                         };
@@ -128,6 +128,7 @@ namespace Ecommerce.Web.Proxy
                 case HttpStatusCode.Unauthorized:
                 case HttpStatusCode.BadRequest:
                 case HttpStatusCode.InternalServerError:
+                case HttpStatusCode.Locked:
                 default:
                     throw new EcommerceWebException(httpResponse.ReasonPhrase, (short)httpResponse.StatusCode)
                     {

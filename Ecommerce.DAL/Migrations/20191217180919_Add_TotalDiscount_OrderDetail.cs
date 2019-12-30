@@ -21,3 +21,4 @@ namespace Ecommerce.DAL.Migrations
         }
     }
 }
+ 

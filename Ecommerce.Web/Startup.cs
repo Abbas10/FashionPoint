@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NLog.Common;
 
 namespace Ecommerce.Web
 {
@@ -36,7 +38,7 @@ namespace Ecommerce.Web
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie();
             #endregion
-
+            
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
@@ -72,3 +74,4 @@ namespace Ecommerce.Web
         }
     }
 }
+;

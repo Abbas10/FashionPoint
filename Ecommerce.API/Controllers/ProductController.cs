@@ -36,11 +36,19 @@ namespace Ecommerce.API.Controllers
         /// </summary>
         /// <param name="paginationFilter"></param>
         /// <returns></returns>
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Customer,Retailer")]
         [Route("get-all")]
         [HttpGet]
         public ServiceDataWrapper<List<ProductRequest>> GetAll([FromQuery]ProductFilter productFilter, [FromQuery]PaginationFilter pagination = null)
         {
-            productFilter.CreatedBy = HttpContext.GetUserId();
+            if (HttpContext.GetRole().Equals(ApplicationConstant.ApplicationRoles.Retailer))
+            {
+                productFilter.CreatedBy = HttpContext.GetUserId();
+            }
+            else
+            {
+                productFilter.Status = ProductStatus.InStock;
+            }
             return new ServiceDataWrapper<List<ProductRequest>>
             {
                 value = _service.GetProductsAsync(productFilter, pagination).Result
@@ -52,6 +60,7 @@ namespace Ecommerce.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>ProductRequest</returns>
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Customer,Retailer")]
         [Route("get/{id}")]
         [HttpGet]
         public ServiceDataWrapper<ProductRequest> Get([FromRoute]int id)
@@ -69,6 +78,7 @@ namespace Ecommerce.API.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = ApplicationConstant.ApplicationRoles.Retailer)]
         [Route("create-product")]
         [HttpPost]
         public ServiceDataWrapper<bool> CreateProduct([FromBody] ProductRequest request)
@@ -85,6 +95,7 @@ namespace Ecommerce.API.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns>true/false</returns>
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = ApplicationConstant.ApplicationRoles.Retailer)]
         [Route("update-product/{id}")]
         [HttpPut]
         public ServiceDataWrapper<bool> UpdateProduct([FromRoute]int id, [FromBody] ProductRequest request)

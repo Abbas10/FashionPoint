@@ -9,7 +9,7 @@ namespace Ecommerce.Model
     {
         /// <summary>
         /// Unique Id
-        /// </summary>
+        /// </summary> 
         public int Id { get; set; }
 
         /// <summary>

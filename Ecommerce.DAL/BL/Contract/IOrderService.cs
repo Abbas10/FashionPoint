@@ -28,7 +28,7 @@ namespace Ecommerce.DAL.BL
         /// <param name="order"></param>
         /// <param name="customerId"></param>
         /// <returns></returns>
-        Task<bool> CreateOrderAsync(List<CustomerOrderedProductRequest> order, string customerId);
+        Task<bool> CreateOrderAsync(List<ShoppingCartRequest> order, string customerId);
 
         /// <summary>
         /// Update Order

@@ -18,7 +18,7 @@ namespace Ecommerce.DAL.BL
         /// <param name="paginationFilter"></param>
         /// <returns></returns>
         Task<List<CategoryRequest>> GetCategoriesAsync(PaginationFilter paginationFilter);
-
+         
         /// <summary>
         /// Get Category By Id
         /// </summary>

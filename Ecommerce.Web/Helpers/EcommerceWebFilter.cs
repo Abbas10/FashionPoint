@@ -23,6 +23,10 @@ namespace Ecommerce.Web.Helpers
                         context.Result = new RedirectResult("/account/login");
                         context.ExceptionHandled = true;
                         break;
+                    case HttpStatusCode.Locked:
+                        context.Result = new RedirectResult("/account/Logout");
+                        context.ExceptionHandled = true;
+                        break;
                     case HttpStatusCode.Forbidden:
                         context.Result = new RedirectResult("/home/error?message=Access Denied");
                         context.ExceptionHandled = true;

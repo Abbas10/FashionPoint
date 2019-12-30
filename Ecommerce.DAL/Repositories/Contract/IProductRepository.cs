@@ -47,3 +47,4 @@ namespace Ecommerce.DAL.Repositories
         Task<bool> DeleteProductAsync(int id, ProductFilter productFilter = null);
     }
 }
+ 

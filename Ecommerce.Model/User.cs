@@ -70,6 +70,10 @@ namespace Ecommerce.Model
         /// <summary>
         /// 
         /// </summary>
+        public string Address { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsLocked { get; set; }
     }
     public class ApplicationUserFilter
@@ -83,6 +87,11 @@ namespace Ecommerce.Model
         /// 
         /// </summary>
         public string Role { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool ExcludeAdmin { get; set; } = true;
 
     }
     /// <summary>

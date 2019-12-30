@@ -24,7 +24,7 @@ namespace Ecommerce.DAL.DataModels
         public bool Invalidated { get; set; }
 
         public string UserId { get; set; }
-
+         
         [ForeignKey(nameof(UserId))]
         public ApplicationUser User { get; set; }
     }

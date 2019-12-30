@@ -41,9 +41,9 @@ namespace Ecommerce.Web.Proxy
         /// </summary>
         /// <param name="register"></param>
         /// <returns></returns>
-        public AuthenticationResponse CustomerRegistration(CustomerRegister register)
+        public AuthenticationResult CustomerRegistration(CustomerRegister register)
         {
-            return MakeRequest<AuthenticationResponse>(_baseUrl + ApiRoutes.Identity.CustomerRegistration, null, GetHttpContent(register));
+            return MakeRequest<AuthenticationResult>(_baseUrl + ApiRoutes.Identity.CustomerRegistration, null, GetHttpContent(register));
         }
 
         /// <summary>
@@ -51,9 +51,9 @@ namespace Ecommerce.Web.Proxy
         /// </summary>
         /// <param name="register"></param>
         /// <returns></returns>
-        public AuthenticationResponse RetailerRegistration(RetailerRegister register)
+        public AuthenticationResult RetailerRegistration(RetailerRegister register)
         {
-            return MakeRequest<AuthenticationResponse>(_baseUrl + ApiRoutes.Identity.RetailerRegistration, null, GetHttpContent(register));
+            return MakeRequest<AuthenticationResult>(_baseUrl + ApiRoutes.Identity.RetailerRegistration, null, GetHttpContent(register));
         }
 
         /// <summary>
@@ -73,6 +73,17 @@ namespace Ecommerce.Web.Proxy
         public bool LockUnlock(string id)
         {
             return PutRequest<bool>(_baseUrl + string.Format(ApiRoutes.Identity.LockUnlock, id), _token, null);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public bool ConfirmEmail(string id, EmailVerificationRequest request)
+        {
+            return PutRequest<bool>(_baseUrl + string.Format(ApiRoutes.Identity.ConfirmEmail, id), null, GetHttpContent(request));
         }
         #endregion
 

@@ -10,7 +10,7 @@ namespace Ecommerce.Model
         /// 
         /// </summary>
         public int PageNumber { get; set; } = 1;
-
+         
         /// <summary>
         /// 
         /// </summary>

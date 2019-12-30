@@ -7,4 +7,4 @@ namespace Ecommerce.Model
     class ApplicationUser
     {
     }
-}
+} 

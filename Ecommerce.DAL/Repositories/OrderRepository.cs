@@ -40,12 +40,12 @@ namespace Ecommerce.DAL.Repositories
 
             if (paginationFilter == null)
             {
-                return await query.ToListAsync();
+                return await query.Include(x => x.OrderDetails).ToListAsync();
             }
             else
             {
                 var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
-                return await query.Skip(skip).Take(paginationFilter.PageSize).ToListAsync();
+                return await query.Include(x=>x.OrderDetails).Skip(skip).Take(paginationFilter.PageSize).ToListAsync();
             }
         }
 
@@ -58,7 +58,8 @@ namespace Ecommerce.DAL.Repositories
         {
             var query = _context.Orders.AsQueryable();
             query = AddFiltersOnQuery(orderFilter, query);
-            return await _context.Orders.Include(x => x.OrderDetails)   
+            return await _context.Orders.Include(x=> x.CreatedByUser)
+                                        .Include(x => x.OrderDetails)   
                                             .ThenInclude(orderDtails=>  orderDtails.Product)
                                         .Include(x => x.OrderDetails)
                                             .ThenInclude(y=> y.Category)
@@ -78,6 +79,9 @@ namespace Ecommerce.DAL.Repositories
             await _context.Orders.AddAsync(order);
             var created = await _context.SaveChangesAsync();
 
+            var ItemsClearToCart = await _context.ShoppingCarts.Where(x => x.CreatedBy == order.CreatedBy).ToListAsync();
+            _context.ShoppingCarts.RemoveRange(ItemsClearToCart);
+            await _context.SaveChangesAsync();
             ///await AddNewOrderDetail(order);
 
             return created > 0;

@@ -42,7 +42,12 @@ namespace Ecommerce
                 //options.UseSqlServer(Config.GetConnectionString("EcommerceDBConnection"));
             });
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>().AddEntityFrameworkStores<EcommerceDbContext>().AddDefaultTokenProviders();
+            services.AddIdentity<ApplicationUser, ApplicationRole>(options=> 
+            {
+                options.Password.RequiredLength = 5;
+                options.SignIn.RequireConfirmedEmail = true;
+            }).AddEntityFrameworkStores<EcommerceDbContext>()
+            .AddDefaultTokenProviders();
 
             var jwtSettings = new JwtSettings();
             Config.Bind(nameof(jwtSettings), jwtSettings);
@@ -58,10 +63,12 @@ namespace Ecommerce
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<ICartService, CartService>();
+            services.AddScoped<ICartRepository, CartRepository>();
 
 
             services.AddControllers(options => {
-                options.Filters.Add(new EcommerceApiExceptionFilter());
+                options.Filters.Add(typeof(EcommerceApiFilter));
             }).ConfigureApiBehaviorOptions(options =>
             {
                 options.InvalidModelStateResponseFactory = context =>
@@ -123,3 +130,4 @@ namespace Ecommerce
         }
     }
 }
+ 

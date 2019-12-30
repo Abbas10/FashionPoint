@@ -62,23 +62,11 @@ namespace Ecommerce.Web.Controllers
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme
                                                     , new ClaimsPrincipal(claimsIdentity)
                                                     , new AuthenticationProperties());
-                    
 
                     if (!string.IsNullOrEmpty(ReturnUrl))
                         return Redirect(ReturnUrl);
 
-                    
-                    //switch (claims.First(x=> x.Type == "role").Value)
-                    //{
-                    //    case ApplicationConstant.ApplicationRoles.Administrator:
-                    //        return RedirectToAction("list", "category");
-                    //    case ApplicationConstant.ApplicationRoles.Retailer:
-                    //        return RedirectToAction("list", "product");
-                    //    case ApplicationConstant.ApplicationRoles.Customer:
-                    //        return RedirectToAction("home", "index");
-                    //}
                     return RedirectToAction("index", "home");
-                    
                 }
                 else {
                     ViewBag.Message = authResponse.Error;
@@ -95,10 +83,14 @@ namespace Ecommerce.Web.Controllers
         public IActionResult CustomerRegistration(CustomerRegister register)
         {
             var authResponse = _proxy.CustomerRegistration(register);
-            if (string.IsNullOrEmpty(authResponse.Error)) {
+            if (authResponse.Errors == null)
+            {
+                var confirmationLink = Url.Action("ConfirmEmail", "Account", new { userId = authResponse.Id, token = authResponse.EmailConfirmationToken }, Request.Scheme);
+                _logger.LogInformation("Email confirmation token:" + confirmationLink);
                 TempData["Message"] = "Verify your email address";
                 return Redirect("/account/login");
             }
+            ViewBag.Message = string.Join(",", authResponse.Errors);
             return View();
         }
         [HttpGet]
@@ -111,17 +103,29 @@ namespace Ecommerce.Web.Controllers
         public IActionResult RetailerRegistration(RetailerRegister register)
         {
             var authResponse = _proxy.RetailerRegistration(register);
-            if (string.IsNullOrEmpty(authResponse.Error))
+            if (authResponse.Errors == null)
             {
+                var confirmationLink = Url.Action("ConfirmEmail", "Account", new { userId = authResponse.Id, token = authResponse.EmailConfirmationToken }, Request.Scheme);
+                _logger.LogInformation("Email confirmation token:" + confirmationLink);
                 TempData["Message"] = "Verify your email address";
                 return Redirect("/account/login");
             }
+            ViewBag.Message = string.Join(",", authResponse.Errors);
             return View();
         }
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Redirect("/home/index");
+        }
+        public IActionResult ConfirmEmail(string userId, string token)
+        {
+            if(userId == null || token == null) { 
+                TempData["Message"] = "Email verification token is not valid";
+                return Redirect("/account/login");
+            }
+            _proxy.ConfirmEmail(userId, new EmailVerificationRequest { Token = token });
+            return RedirectToAction("login");
         }
         #endregion
 

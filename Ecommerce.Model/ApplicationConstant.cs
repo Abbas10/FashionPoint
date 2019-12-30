@@ -8,7 +8,7 @@ namespace Ecommerce.Model
     {
         public static class ApplicationRoles
         {
-            /// <summary>
+            /// <summary> 
             /// 
             /// </summary>
             public const string Administrator = "Administrator";

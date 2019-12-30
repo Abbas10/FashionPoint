@@ -22,7 +22,7 @@ namespace Ecommerce.DAL.DataModels
         /// <summary>
         /// 
         /// </summary>
-        public DateTime OrderDate { get; set; }
+        public DateTime OrderDate { get; set; } 
 
         /// <summary>
         /// 

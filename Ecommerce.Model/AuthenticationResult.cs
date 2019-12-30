@@ -6,10 +6,12 @@ namespace Ecommerce.Model
 {
     public class AuthenticationResult
     {
+        public string Id { get; set; }
         public string Token { get; set; }
         public string RefreshToken { get; set; }
         public bool Success { get; set; }
 
+        public string EmailConfirmationToken { get; set; }
         public IEnumerable<string> Errors { get; set; }
     }
 
@@ -17,7 +19,11 @@ namespace Ecommerce.Model
     {
         public string Token { get; set; }
         public string RefreshToken { get; set; }
-
+        public string Error { get; set; }
+    }
+    public class EmailVerificationRequest 
+    {
+        public string Token { get; set; }
         public string Error { get; set; }
     }
     

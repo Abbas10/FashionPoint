@@ -42,6 +42,23 @@ namespace Ecommerce.Web.Controllers
         #endregion
 
         #region Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Catalog()
+        {
+            var products = _productProxy.GetAll();
+            return View(products);
+        }
+        public IActionResult Detail(int id) {
+            return View();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult List()
         {
@@ -131,7 +148,7 @@ namespace Ecommerce.Web.Controllers
                     AvailableDiscount = e.AvailableDiscount,
                     CategoryName = e.CategoryName,
                     UnitName = e.UnitName,
-                    Status = e.Status,
+                    Status = e.Status.ToString(),
                     IsActive = e.IsActive
                 })
                 .ToDataTablesResponse(dataRequest, recordsTotal, recordsFilterd));

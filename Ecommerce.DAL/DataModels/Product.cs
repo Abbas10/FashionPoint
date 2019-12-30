@@ -22,7 +22,7 @@ namespace Ecommerce.DAL.DataModels
         /// <summary>
         /// 
         /// </summary>
-        public string Photo { get; set; }
+        public string Photo { get; set; } 
         
         /// <summary>
         /// 

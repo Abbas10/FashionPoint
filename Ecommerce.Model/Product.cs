@@ -86,5 +86,7 @@ namespace Ecommerce.Model
         public bool? IsActive { get; set; } 
 
         public int[] ProductIds { get; set; }
+
+        public ProductStatus Status { get; set; }
     }
 }

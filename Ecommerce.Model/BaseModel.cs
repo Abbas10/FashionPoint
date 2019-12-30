@@ -26,4 +26,4 @@ namespace Ecommerce.Model
         /// </summary>
         public DateTime? ModifiedDate { get; set; }
     }
-}
+} 

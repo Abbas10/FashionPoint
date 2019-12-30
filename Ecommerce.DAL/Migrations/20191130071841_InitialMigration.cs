@@ -22,7 +22,7 @@ namespace Ecommerce.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
+                name: "AspNetUsers", 
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),

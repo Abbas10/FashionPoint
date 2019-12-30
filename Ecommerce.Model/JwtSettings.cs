@@ -8,5 +8,5 @@ namespace Ecommerce.Model
     {
         public string Secret { get; set; }
         public TimeSpan TokenLifetime { get; set; }
-    }
+    } 
 }

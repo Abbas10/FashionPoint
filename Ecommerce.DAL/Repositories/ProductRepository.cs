@@ -129,6 +129,11 @@ namespace Ecommerce.DAL.Repositories
              * this filter is used to get product for perticular order calculate the discount and total price.
              */
             queryable = (filter?.ProductIds?.Length > 0) ? queryable.Where(x => filter.ProductIds.Any(y => y == x.Id)) : queryable;
+
+            /*
+             * Get available product only for the customer order purpose.
+             */
+            queryable = (filter?.Status != null && filter?.Status > 0) ? queryable.Where(x=> x.Status == (short)filter.Status) : queryable;
             return queryable;
         }
         #endregion

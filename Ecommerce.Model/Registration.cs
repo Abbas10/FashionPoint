@@ -10,7 +10,7 @@ namespace Ecommerce.Model
     public class Register
     {
         public Register(string role)
-        {
+        { 
             this.Role = role;
         }
         /// <summary>

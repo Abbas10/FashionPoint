@@ -21,7 +21,7 @@ namespace Ecommerce.DAL.BL
         private readonly IMapper _mapper;
         #endregion
 
-        #region Constructor
+        #region Constructor 
         public OrderService(IOrderRepository repository, IProductService productService, IMapper mapper)
         {
             _repository = repository;
@@ -47,7 +47,7 @@ namespace Ecommerce.DAL.BL
                 OrderDate = x.OrderDate,
                 TotalDiscount = x.TotalDiscount,
                 TotalAmount = x.TotalAmount,
-                Status = (OrderStatus)x.Status,
+                Status = (OrderStatus)x.OrderDetails.OrderBy(x=> x.Status).First().Status,
             }).ToList();
 
             //return _mapper.Map<List<OrderRequest>>(data);
@@ -69,6 +69,13 @@ namespace Ecommerce.DAL.BL
                 TotalDiscount = data.TotalDiscount,
                 TotalAmount = data.TotalAmount,
                 Status = (OrderStatus)data.Status,
+                CustomerDetail = new ApplicationUserRequest
+                {
+                    UserName = data.CreatedByUser.UserName,
+                    Email = data.CreatedByUser.Email,
+                    ContactNo = data.CreatedByUser.ContactNo,
+                    Address = string.Format("{0} {1} {2} {3}", data.CreatedByUser.AddressLine1, data.CreatedByUser.AddressLine2, data.CreatedByUser.City, data.CreatedByUser.State)
+                },
                 OrderDetails = data.OrderDetails.Select(x=> new OrderDetailRequest 
                 { 
                     OrderId = x.OrderId,
@@ -96,7 +103,7 @@ namespace Ecommerce.DAL.BL
         /// </summary>
         /// <param name="orderedItems"></param>
         /// <returns></returns>
-        public async Task<bool> CreateOrderAsync(List<CustomerOrderedProductRequest> orderedItems, string customerId)
+        public async Task<bool> CreateOrderAsync(List<ShoppingCartRequest> orderedItems, string customerId)
         {
             var orderProducts = await _productService.GetProductsAsync(new ProductFilter
             {

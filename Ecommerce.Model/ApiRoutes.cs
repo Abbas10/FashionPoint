@@ -47,6 +47,11 @@ namespace Ecommerce.Model
             /// lock-unlock
             /// </summary>
             public const string LockUnlock = Root + "/identity/lock-unlock/{0}";
+
+            /// <summary>
+            /// 
+            /// </summary>
+            public const string ConfirmEmail = Root + "/identity/confirm-email/{0}";
         }
         
         /// <summary>
@@ -170,6 +175,17 @@ namespace Ecommerce.Model
             /// </summary>
             public const string UpdateOrder = Root + "/order/update-order/{0}";
 
+        }
+
+        public struct Cart
+        {
+            public const string GetItems = Root + "/cart/get-items";
+
+            public const string AddItem = Root + "/cart/add-item";
+
+            public const string UpdateItem = Root + "/cart/update-item/{0}";
+
+            public const string RemoveItem = Root + "/cart/remove-item/{0}";
         }
 
         public struct Test

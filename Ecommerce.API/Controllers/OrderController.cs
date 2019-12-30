@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Ecommerce.API.Extensions;
 using Ecommerce.DAL.BL;
@@ -36,11 +35,12 @@ namespace Ecommerce.API.Controllers
         /// </summary>
         /// <param name="paginationFilter"></param>
         /// <returns></returns>
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Retailer,Customer")]
         [Route("get-all")]
         [HttpGet]
         public ServiceDataWrapper<List<OrderRequest>> GetAll([FromQuery]OrderFilter orderFilter, [FromQuery]PaginationFilter pagination = null)
         {
-            if(User.Claims.Any(x=> x.Type == ClaimTypes.Role && x.Value  == ApplicationConstant.ApplicationRoles.Customer))
+            if(HttpContext.GetRole().Equals(ApplicationConstant.ApplicationRoles.Customer))
                 orderFilter.CustomerId = HttpContext.GetUserId();
             else
                 orderFilter.RetailerId = HttpContext.GetUserId();
@@ -55,11 +55,16 @@ namespace Ecommerce.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>OrderRequest</returns>
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Retailer,Customer")]
         [Route("get/{id}")]
         [HttpGet]
         public ServiceDataWrapper<OrderRequest> Get([FromRoute]int id)
         {
-            var orderFilter = new OrderFilter { CustomerId = HttpContext.GetUserId() };
+            var orderFilter = new OrderFilter();
+            if (HttpContext.GetRole().Equals(ApplicationConstant.ApplicationRoles.Customer))
+                orderFilter.CustomerId = HttpContext.GetUserId();
+            else
+                orderFilter.RetailerId = HttpContext.GetUserId();
             return new ServiceDataWrapper<OrderRequest>
             {
                 value = _service.GetOrderById(id, orderFilter).Result
@@ -71,10 +76,10 @@ namespace Ecommerce.API.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,Roles = ApplicationConstant.ApplicationRoles.Customer)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = ApplicationConstant.ApplicationRoles.Customer)]
         [Route("create-order")]
         [HttpPost]
-        public ServiceDataWrapper<bool> CreateOrder([FromBody] List<CustomerOrderedProductRequest> request)
+        public ServiceDataWrapper<bool> CreateOrder([FromBody] List<ShoppingCartRequest> request)
         {
             return new ServiceDataWrapper<bool>
             {
@@ -94,7 +99,7 @@ namespace Ecommerce.API.Controllers
         {
             return new ServiceDataWrapper<bool>
             {
-                value = _service.UpdateOrderAsync(id, request.OrderStatus, HttpContext.GetUserId()).Result
+                value = _service.UpdateOrderAsync(id, request.Status, HttpContext.GetUserId()).Result
             };
         }
 

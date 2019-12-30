@@ -21,7 +21,7 @@ namespace Ecommerce.DAL.DataModels
         [Required]
         [StringLength(150)]
         public string CategoryName { get; set; }
-
+         
         /// <summary>
         /// 
         /// </summary>

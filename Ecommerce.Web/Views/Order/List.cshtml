@@ -17,11 +17,11 @@
                    cols.Add(c => c.Status).Title("Status").Render(() => "statusColumnFormatter").Width("15%");
                    cols.Add(c => c.TotalDiscount).Title("Discount").Render(() => "discountColumnFormatter").Width("15%");
                    cols.Add(c => c.TotalAmount).Title("Total").Render(() => "totalPriceColumnFormatter").Width("10%");
-                   cols.Add(c => c.Id).Data("Id").Title("Action").Render(() => "actionFormatter").Width("20%");
+                   cols.Add(c => c.Id).Data("Id").Title("Action").Render(() => "actionFormatter").Width("10%");
                })
                .ServerSide(true)
                .DataSource(c =>
-                   c.Ajax().Url("/RetailerOrder/GetOrderList").Method("GET")
+                   c.Ajax().Url("/Order/GetOrderList").Method("GET")
                )
 )
 
@@ -42,7 +42,7 @@
             return "<span>" + moment(row.orderDate).format("DD-MM-YYYY") + " </span>";
         }
         function statusColumnFormatter(data, type, row, meta) {
-            return "<span>" + row.status + " </span>";
+            return "<span class=\"badge badge-success\">" + row.status + " </span>";
         }
         function discountColumnFormatter(data, type, row, meta) {
             return "<span>" + row.totalDiscount + "</span>";

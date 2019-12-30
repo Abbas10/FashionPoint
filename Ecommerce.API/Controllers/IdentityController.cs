@@ -62,8 +62,8 @@ namespace Ecommerce.WebService.Controllers
                 value = _service.RegisterAsync(register).Result
             };
         }
-        
-        
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -113,7 +113,7 @@ namespace Ecommerce.WebService.Controllers
             {
                 return new ServiceDataWrapper<AuthenticationResponse>
                 {
-                    ErrorCode = (short) HttpStatusCode.BadRequest,
+                    ErrorCode = (short)HttpStatusCode.BadRequest,
                     Error = authResponse.Errors,
                     value = null
                 };
@@ -122,13 +122,28 @@ namespace Ecommerce.WebService.Controllers
             return new ServiceDataWrapper<AuthenticationResponse>
             {
                 value = new AuthenticationResponse
-                { 
+                {
                     Token = authResponse.Token,
                     RefreshToken = authResponse.RefreshToken
                 }
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [Route("confirm-email/{id}")]
+        [HttpPut]
+        public ServiceDataWrapper<bool> ConfirmEmail([FromRoute]string id, [FromBody] EmailVerificationRequest request)
+        {
+            return new ServiceDataWrapper<bool>
+            {
+                value = _service.ConfirmEmail(id, request.Token).Result
+            };
+        }
 
         /// <summary>
         /// 

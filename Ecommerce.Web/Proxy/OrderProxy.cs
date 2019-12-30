@@ -44,6 +44,15 @@ namespace Ecommerce.Web.Proxy
         {
             return GetRequest<OrderRequest>(_baseUrl + string.Format(ApiRoutes.Order.Get, id), _token);
         }
+        public bool UpdateOrderStatus(int id, UpdateOrderRequest request)
+        {
+            return PutRequest<bool>(_baseUrl + string.Format(ApiRoutes.Order.UpdateOrder, id), _token, GetHttpContent(request)); 
+        }
+
+        public bool CreateOrder(List<ShoppingCartRequest> request)
+        {
+            return MakeRequest<bool>(_baseUrl + ApiRoutes.Order.CreateOrder, _token, GetHttpContent(request));
+        }
         #endregion
 
         #region Helper Methods

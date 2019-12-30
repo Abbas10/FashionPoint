@@ -99,7 +99,7 @@ namespace Ecommerce.DAL.BL
                 UserName = x.UserName,
                 Email = x.Email,
                 ContactNo = x.ContactNo,
-                Role = x.UserRoles.FirstOrDefault()?.Role?.Name,
+                Role = x.UserRoles.FirstOrDefault()?.Role?.Name, 
                 IsLocked = x.LockoutEnabled
             }).ToList();
         }
@@ -115,7 +115,21 @@ namespace Ecommerce.DAL.BL
             return await _repository.LockUnLockApplicationUser(ApplicationUserId);
         }
 
-      
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public Task<bool> ConfirmEmail(string id, string token)
+        {
+            return _repository.ConfirmEmail(id, token);
+        }
+
+        public Task<bool> IsUserLockedByAdmin(string id)
+        {
+            return _repository.IsUserLockedByAdmin(id);
+        }
         #endregion
     }
 }

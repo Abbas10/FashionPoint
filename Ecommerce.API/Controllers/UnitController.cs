@@ -40,7 +40,7 @@ namespace Ecommerce.API.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme
             , Roles = "Administrator,Retailer")]
         [Route("get-all")]
-        [HttpGet]
+        [HttpGet] 
         public ServiceDataWrapper<List<UnitRequest>> GetAll([FromQuery]PaginationFilter pagination = null)
         {
             return new ServiceDataWrapper<List<UnitRequest>>

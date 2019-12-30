@@ -11,7 +11,7 @@ namespace Ecommerce.Model
         /// 
         /// </summary>
         public int Id { get; set; }
-        /// <summary>
+        /// <summary> 
         /// 
         /// </summary>
         [Required]

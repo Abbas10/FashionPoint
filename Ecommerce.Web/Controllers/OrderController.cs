@@ -10,10 +10,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Ecommerce.Web.Controllers
 {
-    public class RetailerOrderController : Controller
+    public class OrderController : Controller
     {
 
         #region Declaration
@@ -22,7 +23,7 @@ namespace Ecommerce.Web.Controllers
         #endregion
 
         #region Constructor
-        public RetailerOrderController(ILogger<HomeController> logger
+        public OrderController(ILogger<HomeController> logger
                                 , IConfiguration config, IHttpClientFactory httpClient, IHttpContextAccessor accessor)
         {
             var token = accessor.HttpContext.User.Claims.First(x => x.Type == "token").Value;
@@ -42,8 +43,19 @@ namespace Ecommerce.Web.Controllers
         [HttpGet]
         public IActionResult Update(int id)
         {
-            _orderProxy.Get(id);
-            return View();
+            ViewBag.OrderStatus = Enum.GetValues(typeof(OrderStatus)).Cast<OrderStatus>().Select(v => new SelectListItem
+                                    {
+                                        Text = v.ToString(),
+                                        Value = ((int)v).ToString()
+                                    }).ToList();
+            var details = _orderProxy.Get(id);
+            return View(details);
+        }
+        [HttpPost]
+        public IActionResult Update(int id, UpdateOrderRequest request)
+        {
+            _orderProxy.UpdateOrderStatus(id, request);
+            return RedirectToAction("List", "Order");
         }
         /// <summary>
         /// 
@@ -70,7 +82,7 @@ namespace Ecommerce.Web.Controllers
                     OrderDate = e.OrderDate,
                     TotalAmount = e.TotalAmount,
                     TotalDiscount = e.TotalDiscount,
-                    Status  = e.Status
+                    Status  = e.Status.ToString()
                 })
                 .ToDataTablesResponse(dataRequest, recordsTotal, recordsFilterd));
             return json;

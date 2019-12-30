@@ -13,11 +13,12 @@ namespace Ecommerce.DAL.DataModels
         }
         public ApplicationRole(string role):base(role)
         {
+            this.Id = Guid.NewGuid().ToString();
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public ICollection<ApplicationUserRole> UserRoles { get; set; }
+        public ICollection<ApplicationUserRole> UserRoles { get;  set; }
     }
 }

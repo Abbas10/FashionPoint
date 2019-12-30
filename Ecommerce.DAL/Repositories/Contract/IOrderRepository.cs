@@ -12,7 +12,7 @@ namespace Ecommerce.DAL.Repositories
     /// </summary>
     public interface IOrderRepository
     {
-        /// <summary>
+        /// <summary> 
         /// Get Order list
         /// </summary>
         /// <returns></returns>
