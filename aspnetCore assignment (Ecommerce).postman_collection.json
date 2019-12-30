@@ -1,0 +1,2613 @@
+{
+	"info": {
+		"_postman_id": "7ec3581d-ab6b-4287-a65e-82fd9b942623",
+		"name": "aspnetCore assignment (Ecommerce)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Create Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"CategoryName\" : \"test\",\n\t\"IsActive\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/category/create-category",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"category",
+								"create-category"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "create-category",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"CategoryName\" : \"Clothes\",\n\t\"IsActive\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/category/create-category",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"category",
+										"create-category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2019 09:27:35 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/category/get-all?PageNumber=1&PageSize=20",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"category",
+								"get-all"
+							],
+							"query": [
+								{
+									"key": "PageNumber",
+									"value": "1"
+								},
+								{
+									"key": "PageSize",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Category with pagination",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/category/get-all?PageNumber=2&PageSize=1",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"category",
+										"get-all"
+									],
+									"query": [
+										{
+											"key": "PageNumber",
+											"value": "2"
+										},
+										{
+											"key": "PageSize",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2019 13:33:08 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": [\n        {\n            \"id\": 2,\n            \"categoryName\": \"test\",\n            \"isActive\": true,\n            \"createdBy\": null,\n            \"createdDate\": null,\n            \"modifiedBy\": null,\n            \"modifiedDate\": null\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Category By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/category/get/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"category",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Category By Id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/category/get?id=1",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"category",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2019 12:52:57 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": {\n        \"id\": 1,\n        \"categoryName\": \"Clothes\",\n        \"isActive\": true,\n        \"createdBy\": null,\n        \"createdDate\": null,\n        \"modifiedBy\": null,\n        \"modifiedDate\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"CategoryName\" : \"Clothes\",\n\t\"IsActive\" : true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/category/update-category/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"category",
+								"update-category",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Category",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"CategoryName\" : \"Clothes\",\n\t\"IsActive\" : true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/category/update-category/1",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"category",
+										"update-category",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2019 14:56:08 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/category/delete/2",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"category",
+								"delete",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Category",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/category/delete/2",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"category",
+										"delete",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2019 13:37:34 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": true\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Unit",
+			"item": [
+				{
+					"name": "Create Unit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"UnitName\" : \"Pcs\",\n\t\"IsActive\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/unit/create-unit",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"unit",
+								"create-unit"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Unit",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"UnitName\" : \"Pcs\",\n\t\"IsActive\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/unit/create-unit",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"unit",
+										"create-unit"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2019 16:37:33 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Unit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/unit/get-all?PageNumber=1&PageSize=20",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"unit",
+								"get-all"
+							],
+							"query": [
+								{
+									"key": "PageNumber",
+									"value": "1"
+								},
+								{
+									"key": "PageSize",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Unit",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/unit/get-all?PageNumber=1&PageSize=1",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"unit",
+										"get-all"
+									],
+									"query": [
+										{
+											"key": "PageNumber",
+											"value": "1"
+										},
+										{
+											"key": "PageSize",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2019 16:39:00 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": [\n        {\n            \"id\": 1,\n            \"unitName\": \"Pcs\",\n            \"isActive\": true,\n            \"createdBy\": null,\n            \"createdDate\": null,\n            \"modifiedBy\": null,\n            \"modifiedDate\": null\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Unit By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/unit/get/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"unit",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Unit By Id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/unit/get/1",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"unit",
+										"get",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2019 16:43:10 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": {\n        \"id\": 1,\n        \"unitName\": \"Pcs\",\n        \"isActive\": true,\n        \"createdBy\": null,\n        \"createdDate\": null,\n        \"modifiedBy\": null,\n        \"modifiedDate\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Unit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"UnitName\" : \"Pcs.\",\n\t\"IsActive\" : true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/unit/update-unit/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"unit",
+								"update-unit",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Unit",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"UnitName\" : \"Pcs.\",\n\t\"IsActive\" : true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/unit/update-unit/1",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"unit",
+										"update-unit",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2019 16:49:49 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Unit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/unit/delete/2",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"unit",
+								"delete",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Unit",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/unit/delete/2",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"unit",
+										"delete",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2019 16:53:02 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": true\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Create Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Retailer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ProductName\" : \"T-Shirt\",\n\t\"Photo\": null,\n\t\"UnitPrice\": 1700,\n\t\"AvailableDiscount\": 10,\n\t\"Status\": 1,\n\t\"UnitId\": 1,\n\t\"CategoryId\": 1,\n\t\"IsActive\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/product/create-product",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"product",
+								"create-product"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "T-shirt",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"ProductName\" : \"T-Shirt\",\n\t\"Photo\": null,\n\t\"UnitPrice\": 1700,\n\t\"AvailableDiscount\": 10,\n\t\"Status\": 1,\n\t\"UnitId\": 1,\n\t\"CategoryId\": 1,\n\t\"IsActive\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/product/create-product",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"product",
+										"create-product"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2019 17:05:58 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": true\n}"
+						},
+						{
+							"name": "Shirt",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"ProductName\" : \"Shirt\",\n\t\"Photo\": null,\n\t\"UnitPrice\": 1350,\n\t\"AvailableDiscount\": 10,\n\t\"Status\": 1,\n\t\"UnitId\": 1,\n\t\"CategoryId\": 1,\n\t\"IsActive\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/product/create-product",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"product",
+										"create-product"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2019 19:01:36 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Retailer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/product/get-all?PageNumber=1&PageSize=10",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"product",
+								"get-all"
+							],
+							"query": [
+								{
+									"key": "PageNumber",
+									"value": "1"
+								},
+								{
+									"key": "PageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Product with Pagination",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/product/get-all?PageNumber=1&PageSize=1",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"product",
+										"get-all"
+									],
+									"query": [
+										{
+											"key": "PageNumber",
+											"value": "1"
+										},
+										{
+											"key": "PageSize",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2019 19:04:02 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": [\n        {\n            \"id\": 1,\n            \"productName\": \"Shirt\",\n            \"photo\": null,\n            \"unitPrice\": 1350,\n            \"availableDiscount\": 10,\n            \"status\": 1,\n            \"unitId\": 1,\n            \"categoryId\": 1,\n            \"isActive\": true,\n            \"createdBy\": null,\n            \"createdDate\": null,\n            \"modifiedBy\": null,\n            \"modifiedDate\": null\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Product By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/product/get/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"product",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"UnitName\" : \"Pcs.\",\n\t\"IsActive\" : true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/unit/update-unit/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"unit",
+								"update-unit",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/unit/delete/2",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"unit",
+								"delete",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Login Request example",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Email\": \"Retailer1@gmail.com\",\n\t\"Password\": \"Retailer1@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Identity/login",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Identity",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Retailer Login Request example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"Email\": \"Retailer1@gmail.com\",\n\t\"Password\": \"Retailer1@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Identity/login",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Identity",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 14 Dec 2019 07:10:01 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJSZXRhaWxlcjFAZ21haWwuY29tIiwianRpIjoiY2FiYzRiOWUtYWEyNy00MDAxLWE2OTQtZjI4ZWMzYmM1YzYwIiwiZW1haWwiOiJSZXRhaWxlcjFAZ21haWwuY29tIiwiaWQiOiI2NDk2NWRmMS1hZWM3LTQ0YmQtYTIyNS01MDFiZjAwYTk5NzEiLCJyb2xlIjoiUmV0YWlsZXIiLCJuYmYiOjE1NzYzMDc0MDEsImV4cCI6MTU3ODM4MTAwMSwiaWF0IjoxNTc2MzA3NDAxfQ.OWMEoHHrZ82NVjGioIDbf9br322mjG_Q5KKLGylY7Tc\",\n        \"refreshToken\": \"382ebbb3-bc6f-4453-ae4e-061a18e2de14\"\n    }\n}"
+						},
+						{
+							"name": "Customer Login Request example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"Email\": \"Abc4@gamil.com\",\n\t\"Password\": \"Abc4@gamil.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Identity/login",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Identity",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 14 Dec 2019 07:10:43 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBYmM0QGdhbWlsLmNvbSIsImp0aSI6Ijk4YTQ3NGYwLTkyYWQtNDk5OC1iYjJjLTU2YjQxYzg4ZDU0ZiIsImVtYWlsIjoiQWJjNEBnYW1pbC5jb20iLCJpZCI6ImZmYTM2OGFmLTJlN2YtNDA2Ny1iNzQ0LTc1YWI1MmIyZTk5ZCIsInJvbGUiOiJDb3N0b21lciIsIm5iZiI6MTU3NjMwNzQ0MywiZXhwIjoxNTc4MzgxMDQzLCJpYXQiOjE1NzYzMDc0NDN9.3JJKc4Gyg-akf6ZNyboqZ2HEBbN98nA3GURGFuxc0Bo\",\n        \"refreshToken\": \"57349232-a2db-4279-87c1-350f2e2e9f74\"\n    }\n}"
+						},
+						{
+							"name": "Admin Login Request example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"Email\": \"panjwani.abbas10@gmail.com\",\n\t\"Password\": \"Abbas123*\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Identity/login",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Identity",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 14 Dec 2019 07:08:28 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYW5qd2FuaS5hYmJhczEwQGdtYWlsLmNvbSIsImp0aSI6IjEzODYyYzc0LTE1NzctNDJlZi1hNDk1LTFkNmQxZjMzMmVmYiIsImVtYWlsIjoicGFuandhbmkuYWJiYXMxMEBnbWFpbC5jb20iLCJpZCI6ImZkNmJkZGU5LTUxNDQtNDJjNy05ODlmLTI2NGYwYzE3OWM0MCIsInJvbGUiOiJBZG1pbmlzdHJhdG9yIiwibmJmIjoxNTc2MzA3MzA4LCJleHAiOjE1NzgzODA5MDgsImlhdCI6MTU3NjMwNzMwOH0.toisKxXQniYLvdUa68HmRMe69En4hnJB22mI0dyRLH4\",\n        \"refreshToken\": \"d53a9aca-af2f-4ed7-b93b-59ff8578f8e9\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Authorization example",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{JwtToken_Customer}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseUrl}}/Values/Get",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Values",
+								"Get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Email\": \"Abc3@gamil.com\",\n    \"Password\": \"Abc3@gamil.com\",\n    \"ContactNo\": \"54455454\",\n    \"Role\": \"Customer\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:64112/api/Identity/registration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "64112",
+							"path": [
+								"api",
+								"Identity",
+								"registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Failed Registration",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Email\": \"Abc1@gamil.com\",\n    \"Password\": \"asdf\",\n    \"ContactNo\": \"54455454\",\n    \"Role\": \"Customer\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:64112/api/Identity/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "64112",
+									"path": [
+										"api",
+										"Identity",
+										"registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2019 19:35:52 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": null,\n    \"refreshToken\": null,\n    \"success\": false,\n    \"errors\": [\n        \"Passwords must be at least 6 characters.\",\n        \"Passwords must have at least one non alphanumeric character.\",\n        \"Passwords must have at least one digit ('0'-'9').\",\n        \"Passwords must have at least one uppercase ('A'-'Z').\"\n    ]\n}"
+						},
+						{
+							"name": "Registration: Customer Successfullly registered",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Email\": \"Abc2@gamil.com\",\n    \"Password\": \"Abc2@gamil.com\",\n    \"ContactNo\": \"54455454\",\n    \"Role\": \"Customer\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:64112/api/Identity/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "64112",
+									"path": [
+										"api",
+										"Identity",
+										"registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2019 19:43:02 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBYmMyQGdhbWlsLmNvbSIsImp0aSI6ImEwZDcyMGIwLThmYjEtNDQ3OC1hOGIyLWUyM2E5ODc4OGE0MCIsImVtYWlsIjoiQWJjMkBnYW1pbC5jb20iLCJpZCI6IjE3OGQyN2M4LTk5M2EtNGUwZC1iOTgxLTgwNmY5MDk3ZjY0MiIsInJvbGUiOiJDdXN0b21lciIsIm5iZiI6MTU3NTQ4ODU2NywiZXhwIjoxNTc1NDkyMTU5LCJpYXQiOjE1NzU0ODg1Njd9.aQSD-JWjrRYvCaRPVspruwomnpvDhnCljUPcZUxRy5A\",\n    \"refreshToken\": \"9806beb4-be49-4927-af55-9688a7af0cee\",\n    \"success\": true,\n    \"errors\": null\n}"
+						},
+						{
+							"name": "Registration customer added",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Email\": \"Abc3@gamil.com\",\n    \"Password\": \"Abc3@gamil.com\",\n    \"ContactNo\": \"54455454\",\n    \"Role\": \"Customer\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:64112/api/Identity/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "64112",
+									"path": [
+										"api",
+										"Identity",
+										"registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 05 Dec 2019 17:13:39 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBYmMzQGdhbWlsLmNvbSIsImp0aSI6ImY2ZjJjYWJiLWM2NjMtNDRhYy05ZGJjLWUzZDk3MDQ3YWJlNiIsImVtYWlsIjoiQWJjM0BnYW1pbC5jb20iLCJpZCI6IjU5MGI0ZmMzLWNiOGItNDc1ZS1hZGU2LTdlODE0MGFlNjcxYSIsInJvbGUiOiJDdXN0b21lciIsIm5iZiI6MTU3NTU2NjAxOSwiZXhwIjoxNTc1NTY5NjE5LCJpYXQiOjE1NzU1NjYwMTl9.TH6lCIFUrfUE3FJzP5dwiD1PA56SH8vOHXnxhK7KilY\",\n    \"refreshToken\": \"68764c11-3633-4d40-8a25-3f774559dc2e\",\n    \"success\": true,\n    \"errors\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Refresh token example",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Retailer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "Bearer {{JwtToken_Customer}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBYmM0QGdhbWlsLmNvbSIsImp0aSI6Ijk4YTQ3NGYwLTkyYWQtNDk5OC1iYjJjLTU2YjQxYzg4ZDU0ZiIsImVtYWlsIjoiQWJjNEBnYW1pbC5jb20iLCJpZCI6ImZmYTM2OGFmLTJlN2YtNDA2Ny1iNzQ0LTc1YWI1MmIyZTk5ZCIsInJvbGUiOiJDb3N0b21lciIsIm5iZiI6MTU3NjMwNzQ0MywiZXhwIjoxNTc4MzgxMDQzLCJpYXQiOjE1NzYzMDc0NDN9.3JJKc4Gyg-akf6ZNyboqZ2HEBbN98nA3GURGFuxc0Bo\",\n\t\"RefreshToken\": \"57349232-a2db-4279-87c1-350f2e2e9f74\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:64112/api/Identity/Refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "64112",
+							"path": [
+								"api",
+								"Identity",
+								"Refresh"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Customer Refresh token example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+										"key": "Authorization",
+										"value": "Bearer {{JwtToken_Customer}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"Token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBYmMzQGdhbWlsLmNvbSIsImp0aSI6IjI1NDY5NDgxLTVlNTMtNGU1Zi05MGZjLWQ3MGQ0YThiOGVkNSIsImVtYWlsIjoiQWJjM0BnYW1pbC5jb20iLCJpZCI6IjU5MGI0ZmMzLWNiOGItNDc1ZS1hZGU2LTdlODE0MGFlNjcxYSIsInJvbGUiOiJDdXN0b21lciIsIm5iZiI6MTU3NTU3MTU0OCwiZXhwIjoxNTc1NTc1MTQ4LCJpYXQiOjE1NzU1NzE1NDh9.2o7rY6gkQfWmiZGd54e7gg-suEk7QG8eaHc9y2M9D6Q\",\n\t\"RefreshToken\": \"9a301daf-3cef-486f-b403-1738cc8290a5\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:64112/api/Identity/Refresh",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "64112",
+									"path": [
+										"api",
+										"Identity",
+										"Refresh"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Customer Registration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Abc4\",\n    \"Email\": \"Abc4@gamil.com\",\n    \"Password\": \"Abc4@gamil.com\",\n    \"ContactNo\": \"54455454\",\n    \"AddressLine1\": \"D-300, Abc society\",\n    \"AddressLine2\": \"ABC Road\",\n\t\"City\": \"Ahmedabad\",\n\t\"State\": \"Gujarat\",\n\t\"Zipcode\": \"380055\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Identity/customer-registration",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Identity",
+								"customer-registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Customer Registration",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"Name\": \"Abc4\",\n    \"Email\": \"Abc4@gamil.com\",\n    \"Password\": \"Abc4@gamil.com\",\n    \"ContactNo\": \"54455454\",\n    \"AddressLine1\": \"D-300, Abc society\",\n    \"AddressLine2\": \"ABC Road\",\n\t\"City\": \"Ahmedabad\",\n\t\"State\": \"Gujarat\",\n\t\"Zipcode\": \"380055\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Identity/customer-registration",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Identity",
+										"customer-registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 14 Dec 2019 06:52:10 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBYmM0QGdhbWlsLmNvbSIsImp0aSI6IjAxYzc5M2Q5LWM1YjEtNGZiMC1hYjYwLWMwODlmZTU4YjJmYyIsImVtYWlsIjoiQWJjNEBnYW1pbC5jb20iLCJpZCI6ImZmYTM2OGFmLTJlN2YtNDA2Ny1iNzQ0LTc1YWI1MmIyZTk5ZCIsInJvbGUiOiJDb3N0b21lciIsIm5iZiI6MTU3NjMwNjMyOSwiZXhwIjoxNTc4Mzc5OTI5LCJpYXQiOjE1NzYzMDYzMjl9.ZYv2Z20gAD-JM8Lgs6HS4MdpXB1YIao2E7nsGV1oo7s\",\n    \"refreshToken\": \"74703d98-4ce2-49fa-b74c-db1e6d1ae335\",\n    \"success\": true,\n    \"errors\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Retailer Registration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Retailer2\",\n    \"Email\": \"Retailer2@gmail.com\",\n    \"Password\": \"Retailer2@gmail.com\",\n    \"BusinessEmail\":\"support@retailer.com\",\n    \"ContactNo\": \"54455454\",\n    \"BusinessAddressLine1\": \"D-300, Abc society\",\n    \"BusinessAddressLine2\": \"ABC Road\",\n\t\"City\": \"Ahmedabad\",\n\t\"State\": \"Gujarat\",\n\t\"Zipcode\": \"380055\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Identity/retailer-registration",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Identity",
+								"retailer-registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Retailer Registration",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"Name\": \"Retailer 1\",\n    \"Email\": \"Retailer1@gmail.com\",\n    \"Password\": \"Retailer1@gmail.com\",\n    \"BusinessEmail\":\"support@retailer.com\",\n    \"ContactNo\": \"54455454\",\n    \"BusinessAddressLine1\": \"D-300, Abc society\",\n    \"BusinessAddressLine2\": \"ABC Road\",\n\t\"City\": \"Ahmedabad\",\n\t\"State\": \"Gujarat\",\n\t\"Zipcode\": \"380055\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Identity/retailer-registration",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Identity",
+										"retailer-registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 14 Dec 2019 06:56:41 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJSZXRhaWxlcjFAZ21haWwuY29tIiwianRpIjoiYjNlYzIzNjMtMTRkMS00ZWEyLTgzNDAtNjgyZDI5OTJmOTg4IiwiZW1haWwiOiJSZXRhaWxlcjFAZ21haWwuY29tIiwiaWQiOiI2NDk2NWRmMS1hZWM3LTQ0YmQtYTIyNS01MDFiZjAwYTk5NzEiLCJyb2xlIjoiUmV0YWlsZXIiLCJuYmYiOjE1NzYzMDY1OTksImV4cCI6MTU3ODM4MDE5OSwiaWF0IjoxNTc2MzA2NTk5fQ.zy2Ahvpn8Jt_IT-d0AtCmp6gt-fZXHHYx7Vhfuw73n0\",\n    \"refreshToken\": \"abf3a832-dfc6-451b-8bf4-05942bf82211\",\n    \"success\": true,\n    \"errors\": null\n}"
+						},
+						{
+							"name": "Retailer 2 Registration ",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"Name\": \"Retailer2\",\n    \"Email\": \"Retailer2@gmail.com\",\n    \"Password\": \"Retailer2@gmail.com\",\n    \"BusinessEmail\":\"support@retailer.com\",\n    \"ContactNo\": \"54455454\",\n    \"BusinessAddressLine1\": \"D-300, Abc society\",\n    \"BusinessAddressLine2\": \"ABC Road\",\n\t\"City\": \"Ahmedabad\",\n\t\"State\": \"Gujarat\",\n\t\"Zipcode\": \"380055\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Identity/retailer-registration",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Identity",
+										"retailer-registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 15 Dec 2019 18:58:59 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJSZXRhaWxlcjJAZ21haWwuY29tIiwianRpIjoiMDYwMGZiMTEtYzlmNy00OTE5LTg1ZmQtYmZiNjVhMTliZTVjIiwiZW1haWwiOiJSZXRhaWxlcjJAZ21haWwuY29tIiwiaWQiOiJkMzk2NmJhYy1mYmVmLTQ5NTQtYjczZS1jMzNjNTFmMDg0Y2MiLCJyb2xlIjoiUmV0YWlsZXIiLCJuYmYiOjE1NzY0MzYzMzksImV4cCI6MTU3ODUwOTkzOSwiaWF0IjoxNTc2NDM2MzM5fQ.w_WoEb05MYbINrfKvpnluMhYok-jN5kYZ4je1bSuFWA\",\n    \"refreshToken\": \"f660b04d-e8a7-4139-abf5-a46512508bdf\",\n    \"success\": true,\n    \"errors\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Retailer 1\",\n    \"Email\": \"panjwani.abbas10@gmail.com\",\n    \"Password\": \"Abbas123*\",\n    \"BusinessEmail\":\"\",\n    \"ContactNo\": \"\",\n    \"BusinessAddressLine1\": \"\",\n    \"BusinessAddressLine2\": \"\",\n\t\"City\": \"Ahmedabad\",\n\t\"State\": \"Gujarat\",\n\t\"Zipcode\": \"380055\",\n\t\"Role\": \"Administrator\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Identity/retailer-registration",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Identity",
+								"retailer-registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lock Unlock Application User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"IsLocked\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/identity/lock-unlock/178d27c8-993a-4e0d-b981-806f9097f642",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"identity",
+								"lock-unlock",
+								"178d27c8-993a-4e0d-b981-806f9097f642"
+							]
+						},
+						"description": "using this enpoint admin can lock/unlock the customer as well as retailer"
+					},
+					"response": []
+				},
+				{
+					"name": "Get user list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/Identity/get-all",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Identity",
+								"get-all"
+							]
+						},
+						"description": "using this endpoint admin call the users list"
+					},
+					"response": [
+						{
+							"name": "Get user list",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Identity/get-all",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Identity",
+										"get-all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 20 Dec 2019 19:06:16 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": [\n        {\n            \"id\": \"178d27c8-993a-4e0d-b981-806f9097f642\",\n            \"userName\": \"Abc2@gamil.com\",\n            \"email\": \"Abc2@gamil.com\",\n            \"contactNo\": null,\n            \"role\": \"Customer\"\n        },\n        {\n            \"id\": \"590b4fc3-cb8b-475e-ade6-7e8140ae671a\",\n            \"userName\": \"Abc3@gamil.com\",\n            \"email\": \"Abc3@gamil.com\",\n            \"contactNo\": null,\n            \"role\": \"Customer\"\n        },\n        {\n            \"id\": \"64965df1-aec7-44bd-a225-501bf00a9971\",\n            \"userName\": \"Retailer1@gmail.com\",\n            \"email\": \"Retailer1@gmail.com\",\n            \"contactNo\": \"54455454\",\n            \"role\": \"Retailer\"\n        },\n        {\n            \"id\": \"d3966bac-fbef-4954-b73e-c33c51f084cc\",\n            \"userName\": \"Retailer2@gmail.com\",\n            \"email\": \"Retailer2@gmail.com\",\n            \"contactNo\": \"54455454\",\n            \"role\": \"Retailer\"\n        },\n        {\n            \"id\": \"fd6bdde9-5144-42c7-989f-264f0c179c40\",\n            \"userName\": \"panjwani.abbas10@gmail.com\",\n            \"email\": \"panjwani.abbas10@gmail.com\",\n            \"contactNo\": \"\",\n            \"role\": \"Administrator\"\n        },\n        {\n            \"id\": \"ffa368af-2e7f-4067-b744-75ab52b2e99d\",\n            \"userName\": \"Abc4@gamil.com\",\n            \"email\": \"Abc4@gamil.com\",\n            \"contactNo\": \"54455454\",\n            \"role\": \"Customer\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Customer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\t{\r\n\t\t\"ProductId\": 1,\r\n\t\t\"Quantity\": 2\r\n\t},\r\n\t{\r\n\t\t\"ProductId\": 2,\r\n\t\t\"Quantity\": 4\r\n\t}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/order/create-order",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"order",
+								"create-order"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Order",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n\t{\r\n\t\t\"ProductId\": 1,\r\n\t\t\"Quantity\": 5\r\n\t},\r\n\t{\r\n\t\t\"ProductId\": 2,\r\n\t\t\"Quantity\": 2\r\n\t}\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/order/create-order",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"order",
+										"create-order"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2019 18:51:00 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "Order list by Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Customer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/order/get-all",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"order",
+								"get-all"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Order list by Customer",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/order/get-all",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"order",
+										"get-all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2019 18:58:17 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"error\": null,\n    \"value\": [\n        {\n            \"id\": 1,\n            \"orderNo\": \"38fc8481-8d26-4a23-9006-02e7071ca366\",\n            \"orderDate\": \"2019-12-18T00:20:35.5996917\",\n            \"totalDiscount\": 1015,\n            \"totalAmount\": 9135,\n            \"status\": 1,\n            \"orderDetails\": null,\n            \"createdBy\": null,\n            \"createdDate\": null,\n            \"modifiedBy\": null,\n            \"modifiedDate\": null\n        },\n        {\n            \"id\": 2,\n            \"orderNo\": \"4db82379-2488-4fa4-94db-a094e4e051d7\",\n            \"orderDate\": \"2019-12-18T00:25:08.2036219\",\n            \"totalDiscount\": 950,\n            \"totalAmount\": 8550,\n            \"status\": 1,\n            \"orderDetails\": null,\n            \"createdBy\": null,\n            \"createdDate\": null,\n            \"modifiedBy\": null,\n            \"modifiedDate\": null\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Order Detail",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Customer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/order/get/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"order",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order By retailer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JwtToken_Retailer}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"OrderStatus\": 2 \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/order/update-order/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"order",
+								"update-order",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/api/Test/Get",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"Test",
+						"Get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HelloWorld",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:64112/api/Test/HelloWorld",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "64112",
+					"path": [
+						"api",
+						"Test",
+						"HelloWorld"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Values",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JwtToken_Customer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/Values/Get",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Values",
+						"Get"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
